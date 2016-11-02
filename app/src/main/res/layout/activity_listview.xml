@@ -8,7 +8,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="My Lists"
             android:id="@+id/listName" android:layout_gravity="center_horizontal"/>
     <ListView
             android:layout_width="match_parent"
