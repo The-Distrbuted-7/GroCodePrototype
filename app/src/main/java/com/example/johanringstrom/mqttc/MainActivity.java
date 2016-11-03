@@ -1,30 +1,16 @@
 package com.example.johanringstrom.mqttc;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.*;
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.UUID;
-
-import static com.example.johanringstrom.mqttc.R.id.listView;
 
 public class MainActivity extends AppCompatActivity implements MqttCallback {
     private MqttAndroidClient client;
@@ -34,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private int qos = 1;
     private ListView ListView ;
     private ArrayAdapter<String> listAdapter ;
-    private String clientId = "johan.ringstrom@gmail.com";
+    private String clientId = "NimaFFard";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
