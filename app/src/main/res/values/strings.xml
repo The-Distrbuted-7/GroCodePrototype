@@ -6,4 +6,5 @@
     <string name="button">Button</string>
     <string name="Item">Enter Item</string>
     <string name="subMsg">Subscrib</string>
+    <string name="List">Enter List</string>
 </resources>
