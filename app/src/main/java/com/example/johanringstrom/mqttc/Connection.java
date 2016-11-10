@@ -21,6 +21,7 @@ public class Connection extends AppCompatActivity implements MqttCallback {
     private MqttAndroidClient client;
     private MqttMessage Mqttmessage;
     private String TAG;
+    //private MqttMessage current;
     //private int qos = 1;
     public String[] ArrMsg;
     private String clientId = "johanringstromgmailcom";
@@ -62,10 +63,10 @@ public class Connection extends AppCompatActivity implements MqttCallback {
 
     }
     //Publish add or delete message to broker in json format send in binary.
-    public void publish(String addOrDeleteOrCreate, EditText listName, EditText item) {
+    public void publish(String addOrDeleteOrCreate, String listName, String item) {
 
-        String listNameMsg = listName.getText().toString();
-        String message = item.getText().toString();
+        String listNameMsg = listName;
+        String message = item;
         String topic = "RootGro/"+ clientId;
         // + clientId + "/" + listName + "\"";
         JSONObject obj = new JSONObject();
@@ -91,6 +92,7 @@ public class Connection extends AppCompatActivity implements MqttCallback {
             encodedPayload = payload.toString().getBytes("UTF-8");
             MqttMessage itemMsg = new MqttMessage(encodedPayload);
             client.publish(topic, itemMsg);
+            //current = itemMsg;
         } catch (UnsupportedEncodingException | MqttException e) {
             e.printStackTrace();
         }
@@ -179,23 +181,44 @@ public class Connection extends AppCompatActivity implements MqttCallback {
     //Get messages on the subscribed message. Clears listview and add the received message split up to a array.
     public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-        String StrMsg = message.toString();
+        JSONObject Obj = new JSONObject(new String(message.getPayload()));
+
+     /*   Obj.getJSONArray("lists").toString();
+        Obj.getJSONArray("items").toString();*/
+        /*String StrMsg = message.toString();
         StrMsg = StrMsg.substring(1,StrMsg.length()-1);
         ArrMsg = StrMsg.split(",");
+*/
+
 
 
         MainActivity Main = new MainActivity();
+        Listview ListV = new Listview();
 
+        if(Obj.has("lists")) {
+            String StrMsg = message.toString();
+            StrMsg = StrMsg.substring(10,StrMsg.length()-2);
+            ArrMsg = StrMsg.split(",");
+            Main.getListAdapter().clear();
+            Main.getListAdapter().addAll(ArrMsg);
+            // MainActivity.listAdapter.clear();
+            //MainActivity.listAdapter.addAll(ArrMsg);
+        }
 
-        Main.getListAdapter().clear();
-        Main.getListAdapter().addAll(ArrMsg);
-        // MainActivity.listAdapter.clear();
-        //MainActivity.listAdapter.addAll(ArrMsg);
-
+        if(Obj.has("items")) {
+            String StrMsg = message.toString();
+            StrMsg = StrMsg.substring(10,StrMsg.length()-2);
+            ArrMsg = StrMsg.split(",");
+            ListV.getListAdapter().clear();
+            ListV.getListAdapter().addAll(ArrMsg);
+            // MainActivity.listAdapter.clear();
+            //MainActivity.listAdapter.addAll(ArrMsg);
+        }
 
     }
     public MqttAndroidClient getClient(){
         return client;
     }
+
 
 }

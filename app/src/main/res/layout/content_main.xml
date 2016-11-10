@@ -19,66 +19,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:hint="@string/Item"
-            android:id="@+id/item"
-            android:textAlignment="center"
-            android:layout_below="@+id/remove" android:layout_alignParentStart="true"/>
-
-    <EditText
-            android:background="@drawable/square"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
             android:hint="@string/List"
             android:id="@+id/ListNameId"
             android:textAlignment="center"
             android:layout_margin="10dp"
-            android:layout_below="@+id/item" android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true" android:layout_below="@+id/subscribe"/>
+
 
     <Button
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="add"
-            android:id="@+id/add"
-            android:layout_above="@+id/item" android:layout_toEndOf="@+id/remove"/>
-    <Button
-            android:onClick="subscribeToTopic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Subscribe"
-            android:id="@+id/subscribe"
-    />
+            android:text="@string/subscribe"
+            android:id="@+id/subscribe"/>
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/List"
-            android:layout_marginTop="180dp"/>
+            android:layout_below="@+id/ListNameId"/>
     <Button
-            android:onClick="unSubscribe"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Unsubscribe"
-            android:id="@+id/unsubscribe" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remove"
-            android:id="@+id/remove" android:layout_below="@+id/subscribe" android:layout_alignStart="@+id/subscribe"/>
+            android:text="@string/unsubscribe"
+            android:id="@+id/unsubscribe"
+            android:layout_alignParentTop="true" android:layout_toEndOf="@+id/subscribe"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Items"
-            android:id="@+id/GetList" android:layout_below="@+id/createList" android:layout_alignEnd="@+id/ListNameId"
-            android:layout_toEndOf="@+id/GetLists"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CreateList"
+            android:text="@string/createlist"
             android:id="@+id/createList"
-            android:layout_alignTop="@+id/unsubscribe" android:layout_alignEnd="@+id/GetList"/>
+            android:layout_toEndOf="@+id/unsubscribe"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lists"
-            android:id="@+id/GetLists" android:layout_below="@+id/unsubscribe" android:layout_toEndOf="@+id/add"/>
+            android:text="@string/Lists"
+            android:id="@+id/GetLists" android:layout_alignTop="@+id/createList" android:layout_alignParentEnd="true"/>
 </RelativeLayout>

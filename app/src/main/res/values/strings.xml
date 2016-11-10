@@ -3,8 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_mqtt_connection">Mqtt_connection</string>
     <string name="title_activity_connection">Connection</string>
-    <string name="button">Button</string>
     <string name="Item">Enter Item</string>
-    <string name="subMsg">Subscrib</string>
     <string name="List">Enter List</string>
+    <string name="subscribe">Sub</string>
+    <string name="unsubscribe">Unsub</string>
+    <string name="createlist">Create</string>
+    <string name="Lists">Lists</string>
+
+
 </resources>
