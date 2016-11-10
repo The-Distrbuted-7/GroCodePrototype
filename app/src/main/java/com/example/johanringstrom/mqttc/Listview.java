@@ -29,8 +29,11 @@ public class Listview extends AppCompatActivity {
 
         item = (EditText) findViewById(R.id.Item);
 
-        con = new Connection(Listview.this, Listview.this);
+        //Make a connection if not aready connected
+       con = new Connection(Listview.this, Listview.this);
         client = con.getClient();
+
+        //Creates a listview
         Listview = (ListView) findViewById(R.id.listVItem);
         //Create a adapter to listview
         ArrayList<String> GroList = new ArrayList<>();
@@ -47,9 +50,6 @@ public class Listview extends AppCompatActivity {
                 Object listItem = Listview.getItemAtPosition(position);
                 String listStr = listItem.toString();
                 item.setText(listStr.substring(1, listStr.length()-1));
-
-
-
             }
         });
 

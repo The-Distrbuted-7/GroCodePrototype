@@ -21,8 +21,6 @@ public class Connection extends AppCompatActivity implements MqttCallback {
     private MqttAndroidClient client;
     private MqttMessage Mqttmessage;
     private String TAG;
-    //private MqttMessage current;
-    //private int qos = 1;
     public String[] ArrMsg;
     private String clientId = "johanringstromgmailcom";
     private int qos = 1;
@@ -64,11 +62,10 @@ public class Connection extends AppCompatActivity implements MqttCallback {
     }
     //Publish add or delete message to broker in json format send in binary.
     public void publish(String addOrDeleteOrCreate, String listName, String item) {
-
+        //Make almost a a Jsonobject following our RFC. Waiting to get it aproved
         String listNameMsg = listName;
         String message = item;
         String topic = "RootGro/"+ clientId;
-        // + clientId + "/" + listName + "\"";
         JSONObject obj = new JSONObject();
         JSONObject obj2 = new JSONObject();
         try {
@@ -81,18 +78,11 @@ public class Connection extends AppCompatActivity implements MqttCallback {
 
         JSONObject payload = obj;
 
-        /*String payload = "{"+
-                "\"" + "ClientId" + "\"" +":"+ "\"" + clientId +"\"" +","
-                + "\"" + "Request" + "\"" +":"+ "\"" + addOrDeleteOrCreate +"\"" +","
-                + "\"" + listNameMsg + "\"" +":"+ "\"" + message +"\""
-                + "}";*/
-        //"{"+ "\"" + addOrDelete + "\"" +":"+ "\"" + message +"\"" +"}";*/
         byte[] encodedPayload = new byte[0];
         try {
             encodedPayload = payload.toString().getBytes("UTF-8");
             MqttMessage itemMsg = new MqttMessage(encodedPayload);
             client.publish(topic, itemMsg);
-            //current = itemMsg;
         } catch (UnsupportedEncodingException | MqttException e) {
             e.printStackTrace();
         }
@@ -126,7 +116,7 @@ public class Connection extends AppCompatActivity implements MqttCallback {
 
     //Unsubscribe to predefined list.
     public void unSubscribe(){
-        String topic = "JohanPhone/List";
+        String topic = "RootClient/"+ clientId;
         try {
             IMqttToken unsubToken = client.unsubscribe(topic);
             unsubToken.setActionCallback(new IMqttActionListener() {
@@ -155,7 +145,7 @@ public class Connection extends AppCompatActivity implements MqttCallback {
         // Called when the connection to the server has been lost.
         // An application may choose to implement reconnection
         // logic at this point. This sample simply exits.
-        Log.d(TAG, "Connection to " + "broker.hivemq.com" + " lost!");
+        Log.d(TAG, "Connection to " + "broker." + " lost!");
         System.exit(1);
     }
 
@@ -201,8 +191,6 @@ public class Connection extends AppCompatActivity implements MqttCallback {
             ArrMsg = StrMsg.split(",");
             Main.getListAdapter().clear();
             Main.getListAdapter().addAll(ArrMsg);
-            // MainActivity.listAdapter.clear();
-            //MainActivity.listAdapter.addAll(ArrMsg);
         }
 
         if(Obj.has("items")) {
@@ -211,8 +199,6 @@ public class Connection extends AppCompatActivity implements MqttCallback {
             ArrMsg = StrMsg.split(",");
             ListV.getListAdapter().clear();
             ListV.getListAdapter().addAll(ArrMsg);
-            // MainActivity.listAdapter.clear();
-            //MainActivity.listAdapter.addAll(ArrMsg);
         }
 
     }

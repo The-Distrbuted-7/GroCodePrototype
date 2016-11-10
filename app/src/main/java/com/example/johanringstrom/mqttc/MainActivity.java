@@ -36,14 +36,12 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class MainActivity extends AppCompatActivity  {
     private MqttAndroidClient client;
     private EditText listName;
-    //String messagesArrived;
     private String TAG;
     private int qos = 1;
     private ListView ListView ;
     private static  ArrayAdapter<String> listAdapter ;
     private String clientId = "johanringstromgmailcom";
     Connection con;
-    String[] ArrMsg;
     private String topic;
 
     @Override
@@ -53,11 +51,9 @@ public class MainActivity extends AppCompatActivity  {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Creates broker connection if not already created.
         con = new Connection(MainActivity.this, MainActivity.this);
         client = con.getClient();
-
-
-
 
         //List view to display list
         ListView = (ListView) findViewById(R.id.List);
@@ -111,13 +107,14 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
-
+    //Go to listview and pass the list name to listview activity
     public void goToList(String str){
         Intent intent = new Intent(this, Listview.class);
         intent.putExtra("ListName", str);
         startActivity(intent);
     }
 
+    //Gets listadapter
     public ArrayAdapter<String> getListAdapter(){
         return this.listAdapter;
     }
